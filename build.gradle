@@ -1,0 +1,66 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.6'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'java-learn'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+// ================== GLOBAL VARIABLES ==================
+ext {
+	set('mapstructVersion', "1.5.5.Final")
+}
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	// ==== su dung jpa (cho tang repo) JPA / Hibernate (Repository)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// ==== REST API, Controller, JSON
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// ==== Bean Validation (@Valid, @NotNull, ...)
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//MySQL driver
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// === Object Mapping (DTO <-> Entity)
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+	// ==== API Documentation (Swagger / OpenAPI) ====
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+	// ===== Spring Security =====
+	// Spring Boot tự động load SecurityAutoConfiguration bên trong starter
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// ====  OAuth2 JWT
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+	// ==== ==== Lombok (reduce boilerplate code) ====
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	// Kết hợp Lombok + MapStruct
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+	// ==== Unit Test ====
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// ================== TEST CONFIG ==================
+tasks.named('test') {
+	useJUnitPlatform()
+}
