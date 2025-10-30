@@ -10,18 +10,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SecurityUtil {
 
-    public boolean isAdmin() {
-        try {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (auth instanceof JwtAuthenticationToken jwtAuth) {
-                Long actorType = jwtAuth.getToken().getClaim("actorType");
-                log.info("Checking admin access - ActorType: {}", actorType);
-                return actorType != null && actorType == 0L;
-            }
-            return false;
-        } catch (Exception e) {
-            log.error("Error checking admin role", e);
-            return false;
-        }
+  public boolean isAdmin() {
+    try {
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      if (auth instanceof JwtAuthenticationToken jwtAuth) {
+        Long actorType = jwtAuth.getToken().getClaim("actorType");
+        log.info("Checking admin access - ActorType: {}", actorType);
+        return actorType != null && actorType == 0L;
+      }
+      return false;
+    } catch (Exception e) {
+      log.error("Error checking admin role", e);
+      return false;
     }
+  }
 }

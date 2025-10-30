@@ -19,25 +19,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true)
 public class AuthController implements AuthApi {
-    @NotNull
-    TokenAuthenticationUseCaseService tokenAuthenticationUseCaseService;
+  @NotNull TokenAuthenticationUseCaseService tokenAuthenticationUseCaseService;
 
-    @NotNull
-    UserUseCaseServiceImpl userUseCaseServiceImpl;
+  @NotNull UserUseCaseServiceImpl userUseCaseServiceImpl;
 
-
-    @Override
-    public ValueResponse<JwtResponse> auth(LoginRequest loginRequest) {
-        UserAuthentication userAuthentication = (UserAuthentication) tokenAuthenticationUseCaseService.login(
-                        loginRequest.username(),
-                        loginRequest.password())
-                .orElseThrow(() -> {
-                    return new ApplicationException(ErrorCode.LOGIN_INVALID,
-                            ErrorCode.LOGIN_INVALID.getMessage(),
-                            HttpStatus.UNAUTHORIZED);
-                });
-        JwtToken jwtToken = userUseCaseServiceImpl.auth(userAuthentication.user());
-        JwtResponse jwtResponse = JwtResponse.of(jwtToken);
-        return new ValueResponse<>(jwtResponse);
-    }
+  @Override
+  public ValueResponse<JwtResponse> auth(LoginRequest loginRequest) {
+    UserAuthentication userAuthentication =
+        (UserAuthentication)
+            tokenAuthenticationUseCaseService
+                .login(loginRequest.username(), loginRequest.password())
+                .orElseThrow(
+                    () -> {
+                      return new ApplicationException(
+                          ErrorCode.LOGIN_INVALID,
+                          ErrorCode.LOGIN_INVALID.getMessage(),
+                          HttpStatus.UNAUTHORIZED);
+                    });
+    JwtToken jwtToken = userUseCaseServiceImpl.auth(userAuthentication.user());
+    JwtResponse jwtResponse = JwtResponse.of(jwtToken);
+    return new ValueResponse<>(jwtResponse);
+  }
 }

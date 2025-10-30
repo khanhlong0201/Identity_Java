@@ -19,16 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Tag(name = "auth", description = "authen")
 @RequestMapping("v1/api/auth")
 @ApiResponse(
-        responseCode = "400 -> 500", content = {
-                @Content(schema = @Schema(implementation = ApiErrorResponse.class))
-        }
-)
+    responseCode = "400 -> 500",
+    content = {@Content(schema = @Schema(implementation = ApiErrorResponse.class))})
 public interface AuthApi {
 
-    @Operation(operationId = "auth", summary = "auth", description = "")
-    @ApiResponse(responseCode = "200", content = {
-            @Content(schema = @Schema(implementation = JwtResponse.class))
-    })
-    @PostMapping("/login")
-    ValueResponse<JwtResponse> auth(@Valid @RequestBody LoginRequest loginRequest);
+  @Operation(operationId = "auth", summary = "auth", description = "")
+  @ApiResponse(
+      responseCode = "200",
+      content = {@Content(schema = @Schema(implementation = JwtResponse.class))})
+  @PostMapping("/login")
+  ValueResponse<JwtResponse> auth(@Valid @RequestBody LoginRequest loginRequest);
 }

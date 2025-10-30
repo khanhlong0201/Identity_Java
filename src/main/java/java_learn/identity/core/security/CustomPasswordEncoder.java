@@ -7,19 +7,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class CustomPasswordEncoder implements PasswordEncoder {
-    BCryptPasswordEncoder delegate = new BCryptPasswordEncoder(10);
+  BCryptPasswordEncoder delegate = new BCryptPasswordEncoder(10);
 
-    @Override
-    public String encode(CharSequence rawPassword) {
-        return delegate.encode(rawPassword);
-    }
+  @Override
+  public String encode(CharSequence rawPassword) {
+    return delegate.encode(rawPassword);
+  }
 
-    @Override
-    public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        return delegate.matches(rawPassword, encodedPassword);
-    }
-
-
+  @Override
+  public boolean matches(CharSequence rawPassword, String encodedPassword) {
+    return delegate.matches(rawPassword, encodedPassword);
+  }
 }

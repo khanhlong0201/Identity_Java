@@ -3,7 +3,6 @@ package java_learn.identity.service.users;
 import jakarta.validation.constraints.NotNull;
 import java_learn.identity.core.common.exceptions.ApplicationException;
 import java_learn.identity.core.common.exceptions.ResourceNotFoundException;
-import java_learn.identity.core.security.models.JwtToken;
 import java_learn.identity.core.security.service.JWTTokenService;
 import java_learn.identity.domain.constants.ErrorCode;
 import java_learn.identity.domain.users.User;
@@ -22,36 +21,37 @@ import org.springframework.stereotype.Service;
 @FieldDefaults(makeFinal = true)
 public class UserQueryService {
 
-    @NonNull
-    UserRepository repository;
+  @NonNull UserRepository repository;
 
-    @NonNull
-    UserMapper userMapper;
+  @NonNull UserMapper userMapper;
 
-    @NotNull
-    JWTTokenService jwtTokenService;
+  @NotNull JWTTokenService jwtTokenService;
 
-    public User findById(UserId userId){
-        UserEntity userEntity = repository.findById(userId.value())
-                .orElseThrow(ResourceNotFoundException::new);
-        return userMapper.toDto(userEntity);
-    }
+  public User findById(UserId userId) {
+    UserEntity userEntity =
+        repository.findById(userId.value()).orElseThrow(ResourceNotFoundException::new);
+    return userMapper.toDto(userEntity);
+  }
 
-    public User findByUsername(String username){
-        UserEntity userEntity = repository.findByUsername(username)
-                .orElseThrow(() -> {
-                    return new ApplicationException(ErrorCode.LOGIN_INVALID,
-                            ErrorCode.LOGIN_INVALID.getMessage(),
-                            HttpStatus.UNAUTHORIZED);
+  public User findByUsername(String username) {
+    UserEntity userEntity =
+        repository
+            .findByUsername(username)
+            .orElseThrow(
+                () -> {
+                  return new ApplicationException(
+                      ErrorCode.LOGIN_INVALID,
+                      ErrorCode.LOGIN_INVALID.getMessage(),
+                      HttpStatus.UNAUTHORIZED);
                 });
-        return userMapper.toDto(userEntity);
-    }
+    return userMapper.toDto(userEntity);
+  }
 
-    public boolean existsByUsername(String username){
-        return repository.existsByUsername(username);
-    }
+  public boolean existsByUsername(String username) {
+    return repository.existsByUsername(username);
+  }
 
-    public boolean existsByEmail(String username){
-        return repository.existsByEmail(username);
-    }
+  public boolean existsByEmail(String username) {
+    return repository.existsByEmail(username);
+  }
 }

@@ -15,18 +15,15 @@ import org.springframework.stereotype.Service;
 @FieldDefaults(makeFinal = true)
 public class UserCommandService {
 
-    @NonNull
-    UserRepository repository;
+  @NonNull UserRepository repository;
 
-    @NonNull
-    UserMapper userMapper;
-    @NonNull
-    CustomPasswordEncoder passwordEncoder;
+  @NonNull UserMapper userMapper;
+  @NonNull CustomPasswordEncoder passwordEncoder;
 
-    public void save(User user) {
-        UserEntity userEntity = userMapper.toEntity(user);
-        userEntity.setIsExpiredPwd(true);
-        userEntity.setPassword(passwordEncoder.encode(user.password()));
-        repository.save(userEntity);
-    }
+  public void save(User user) {
+    UserEntity userEntity = userMapper.toEntity(user);
+    userEntity.setIsExpiredPwd(true);
+    userEntity.setPassword(passwordEncoder.encode(user.password()));
+    repository.save(userEntity);
+  }
 }

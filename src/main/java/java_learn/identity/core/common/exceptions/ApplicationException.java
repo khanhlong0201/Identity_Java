@@ -11,11 +11,11 @@ import org.springframework.util.StringUtils;
 @AllArgsConstructor
 @Getter
 public class ApplicationException extends RuntimeException {
-    ErrorCodes errorCode;
-    String message;
-    HttpStatus httpStatus;
+  ErrorCodes errorCode;
+  String message;
+  HttpStatus httpStatus;
 
-    public String asMessage(){
-        return StringUtils.hasText(this.message) ? this.message : this.errorCode.getMessage();
-    }
+  public String asMessage() {
+    return StringUtils.hasText(this.message) ? this.message : this.errorCode.getMessage();
+  }
 }

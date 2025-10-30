@@ -16,15 +16,13 @@ import org.springframework.stereotype.Service;
 @FieldDefaults(makeFinal = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @NotNull
-    UserQueryService userQueryService;
+  @NotNull UserQueryService userQueryService;
 
-    @NotNull
-    UserMapper userMapper;
+  @NotNull UserMapper userMapper;
 
-    @Override
-    public UserDetails loadUserByUsername(String username){
-        User user = userQueryService.findByUsername(username);
-        return new UserAuthentication(user);
-    }
+  @Override
+  public UserDetails loadUserByUsername(String username) {
+    User user = userQueryService.findByUsername(username);
+    return new UserAuthentication(user);
+  }
 }

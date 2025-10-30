@@ -2,7 +2,6 @@ package java_learn.identity.controller.api.user.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -24,11 +23,13 @@ Chỉ định annotation này được phép gắn ở đâu.
 */
 @Target({ElementType.FIELD})
 /*
-* annotation này sẽ tồn tại và có hiệu lực ở runtime (khi chương trình chạy).
-* */
+ * annotation này sẽ tồn tại và có hiệu lực ở runtime (khi chương trình chạy).
+ * */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueEmail { // đây là cách java định nghĩa annotation mới
-    String message() default "Email đã tồn tại trong hệ thống";
-    Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
+  String message() default "Email đã tồn tại trong hệ thống";
+
+  Class<?>[] groups() default {};
+
+  Class<? extends Payload>[] payload() default {};
 }
