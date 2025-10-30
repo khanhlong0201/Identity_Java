@@ -1,5 +1,5 @@
 package java_learn.identity.service.auth;
-;
+
 import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
