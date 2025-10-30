@@ -2,14 +2,18 @@ package java_learn.identity.core.starter.database;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java_learn.identity.core.common.BaseEntityListener;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +21,8 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EqualsAndHashCode
+@EntityListeners({AuditingEntityListener.class, BaseEntityListener.class})
+@MappedSuperclass
 public abstract class Auditable {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) //khong dc gán từ request ,mà chỉ được trả ra từ response)
     @Column(name = "created_by")
@@ -37,5 +43,10 @@ public abstract class Auditable {
     @LastModifiedDate //spring tu dong ghi nhan thoi diem cap nhat cuoi cung
     @Temporal(TemporalType.TIMESTAMP)//JPA chinh dinh mapping luu ngay gio tu java vao sql
     protected LocalDateTime updatedAt;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(name = "created_program")
+    private String createdProgram;
+
 
 }

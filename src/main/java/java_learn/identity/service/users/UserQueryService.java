@@ -46,4 +46,12 @@ public class UserQueryService {
                 });
         return userMapper.toDto(userEntity);
     }
+
+    public boolean existsByUsername(String username){
+        return repository.existsByUsername(username);
+    }
+
+    public boolean existsByEmail(String username){
+        return repository.existsByEmail(username);
+    }
 }

@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import java_learn.identity.core.security.ActorType;
 import java_learn.identity.core.security.models.JwtProperties;
 import lombok.AccessLevel;
 import lombok.NonNull;
@@ -64,7 +65,7 @@ public class JWTTokenService {
     }
 
     /*Sinh ra token co chu ky RSA*/
-    public String createAccessToken(String subject, Map<String, Object> claims) {
+    public String createAccessToken(ActorType actorType, String subject, Map<String, Object> claims) {
         Instant now = Instant.now();
         JwtClaimsSet.Builder claimBuilder = JwtClaimsSet.builder();
         claimBuilder
@@ -74,10 +75,11 @@ public class JWTTokenService {
                 .expiresAt(now.plusSeconds(jwtProperties.getJwtAccessTokenExpirationS()));
         Objects.requireNonNull(claimBuilder);
         claims.forEach(claimBuilder::claim);
+        claimBuilder.claim("actorType", actorType.ordinal());
         return jwtEncoder().encode(JwtEncoderParameters.from(claimBuilder.build())).getTokenValue();
     }
 
-    public String createRefreshToken(String subject, Map<String, Object> claims) {
+    public String createRefreshToken(ActorType actorType,String subject, Map<String, Object> claims) {
         Instant now = Instant.now();
         JwtClaimsSet.Builder claimBuilder = JwtClaimsSet.builder();
         claimBuilder
@@ -87,6 +89,7 @@ public class JWTTokenService {
                 .subject(subject);
         Objects.requireNonNull(claimBuilder);
         claims.forEach(claimBuilder::claim);
+        claimBuilder.claim("actorType", actorType.ordinal());
         return this.jwtEncoder()
                 .encode(JwtEncoderParameters.from(claimBuilder.build()))
                 .getTokenValue();

@@ -12,4 +12,5 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface UserModelMapper extends ModelMapper <UserResponse, User>{
     UserResponse toModel(User user);
+    User toDto(UserRequest userRequest);
 }

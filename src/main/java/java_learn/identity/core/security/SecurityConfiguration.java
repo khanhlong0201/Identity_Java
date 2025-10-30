@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,6 +24,7 @@ import java.util.List;
 @EnableConfigurationProperties(SecurityProperties.class)/*Cho phép Spring tự load config từ application.yml vào class SecurityProperties*/
 @RequiredArgsConstructor/*Tự động tạo constructor có tham số cho các field final*/
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@EnableMethodSecurity // cho hoạt động PreAuthorize, PostAuthorize
 public class SecurityConfiguration {
     /*Xử lý lỗi 401 - Unauthorized (khi người dùng chưa đăng nhập hoặc token sai).*/
     @NonNull
@@ -47,6 +49,14 @@ public class SecurityConfiguration {
         permitAll.add("/actuator/**");
         permitAll.add("/favicon.ico");
 
+        /*
+        Là 1 Resource Server ( do khởi tạo trong JWTTokenService)
+        Spring sẽ tự động:
+        Dò bean JwtDecoder (do bạn khai báo trong JWTTokenService).
+        Dùng nó để giải mã và xác thực token.
+        Nếu token hợp lệ → cho phép truy cập.
+        Nếu sai → ném lỗi OAuth2AuthenticationException → gọi CustomAuthenticationEntryPoint.
+        * */
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
 
         http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

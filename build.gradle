@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.6'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'com.diffplug.spotless' version '6.25.0'   // cài đặt spot less để định dạng code
 }
 
 group = 'java-learn'
@@ -58,9 +59,24 @@ dependencies {
 	// ==== Unit Test ====
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// ==== Unit Test
+	implementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// ==== Spring Security Test (QUAN TRỌNG: cung cấp @WithMockUser) ====
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 // ================== TEST CONFIG ==================
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+spotless {
+	java {
+		target 'src/**/*.java'    // Áp dụng cho toàn bộ file Java
+		googleJavaFormat()        // Dùng chuẩn format của Google
+		// hoặc dùng Eclipse style:
+		// eclipse().configFile('config/eclipse-java-format.xml')
+	}
 }

@@ -7,6 +7,8 @@ spring:
   jpa:
     properties:
       hibernate.dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
 server:
   port: 9090
 
@@ -18,44 +20,44 @@ security:
     - /swagger-ui/**
     - /v3/api-docs/**
 jwt:
-  privateKey: |
+  privateKey: |  
     -----BEGIN PRIVATE KEY-----
-    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCU3i10uj6OwIEq
-    LGq0MutqQgP/4sUNOdt25BWFE4lt8Fbof79qn/UWVjjbN6A5S8k3JuY8nyPRxJWh
-    eNUuvNcDJMjGLlivTkgWH1vFwQC7uz3qy3i4f4UUVru3C3nGZLhfOxO5A5i4VEwA
-    xhnTkkUHXwK3Vr231Skf9N6npeg/SDbhYR0CntxIpWJgdYb3AH2ntju5oZVUPRDu
-    SBpRtO9mrzDNWm/qhqs8CLlyhQh5cYRi2HinpDOD81y00bCXCGFFfT4IVZ78X3PJ
-    Pd9FFO2IPeTznNRX60cNUq7eeWnaDXIMf8LgMxys2oxZkkEF5F0jjGxkv5xc69y+
-    WN9p59TXAgMBAAECggEAKQAwQM/y3tpCON1W3h6QHAnmlBle8E+ZFFupWaeR2Eez
-    iAF3NOStWeORcT8Wz/EBkEEUdGnYMbQVCg3/mQnFpkYBTiQBpPbIf99PJV4M16ew
-    W/SCYT4t5vYkaTut5GhlJ0VcHz7QVyRQcn4dKtpETM1sMBah1fnNg9GraT0WhCbx
-    4pV3vF05nWJGV1pFQBy4HuUU9mlf8zS7aXeYa8bknYG9VBnI3T+6x4G8+evPYUT3
-    bAQCiKT+al1F6uTGGh+E+ng/z9PcIejzBeknHYi/giR8Mh8f/HSx9tsFQO8MVy+Z
-    HrvRNTUXyB61CJjS000zPBcOW2qYjCAMqyK0+4hxcQKBgQDMFNG3ht1o7vA8zwrw
-    o1S6oWgsTNnZ/sf6OQrI7XcfLi/Bt91nJFjp473G6/7XQUeV0NHonFCTKCmIuZhs
-    MhWrdwRwJsON3lprxJE54Ctvt5lErKZI2g56fwjXHi27llOFYL6YwDhh4n/OR3KQ
-    WQARTaFiUIQL3dUJnC77qF5UQwKBgQC6vXqSTbRf04Li/8dHEVo8UlYPtzw5cHOp
-    Yki49qV0tRpiNUyD7FJ1wuIvqIYA7P1qmXcqoLT2WAxtNdE8d7QBqAwhpNDluJjc
-    H9iga6L87+4zqBF9oHV8Qk+vPuMinfyUVegjyOvEVRy/RaNJXaqJQd+ojR0SZqEn
-    G3prB0Sd3QKBgAp9s340v6MKTW1C03QlYVCqxXkphjVvpIYXcpd7pZkDvc6+jfIk
-    azGy1GmqbhJQt8Za0r+bcYTvFpuBtvUw6e5DkwXU6E6dtJY/p5uLC5CVpppiKbYr
-    B32ClEjCs2UmSCreG04s63kUtK88+wWynY9GJ1qveupFQBNbZQroz9iTAoGAZXmj
-    iq85Dj2kyW/OvVq7mz3u0Fl1G410/J2RARnerT3gmW93JdUctitxuA4uy3/88Zl1
-    fS+ZRqhwEESHcAFoSuIjvYCPl9WpEy0nDX2QMzy6R03UO10fmqd6H7Pfv6b0YzMP
-    k6qSG71YgsP3yF1i13V5cWFFZANrHRI8gr6PVe0CgYEApsj/JrM4LWSKmPumn8bs
-    oRM3JqvrGWjqHLUXLov3zojICxWFFhpMHqa8YgrYtBDnowyMs0ikuho4uMkBGCXD
-    e9ws64yoIO4BOQUmPY/ix/jtk7xvam/NHmmj/bD71djmEU9lwgJJrAmRNzGyCZZ4
-    /KvNps4gWk3V9soJYod1Gh0=
+    MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCWWyyBYFzi8xkY
+    tqNCzw6T5f/FfYAf0c8vuJN+3YLZr+oiz9l3oO0sUCkaWoCqIq12MQImEBEIoNVq
+    DDrRNOtKkq0tbw3vz2cmC7mqQAnV766TXgjP1fIIet5KphzsOlHEMUOSiXMy5ZFO
+    dPK+Bwaxoa2CI7t8Eo0hoEZRAPZc79Qz78yW7JCB+dnH0/V3nBCiOK2BNXBZvoXQ
+    2avmmNkEjqNN2NNyuxLNICZ7bvDkC+jy/6Bcx/QwcJ5yx6HPs7UXBljG7RF8x3fF
+    nUTWkpbYYZ08ewjVDuRHAOMFUJCNoc47IkA+G4MgNenvHrVHs4/MsRDxNOBvw/Pe
+    iXqn/mZzAgMBAAECggEAQvKTzYOXuGHf8dYYub2yUv5dNZVdAE4Of8QiwKFnCwC+
+    MwPzY8Xe9RU4SAi2M4s/S1olB8etnfbnL9IEOnTis5C91XYWcYoa9qDP6dObzYts
+    YyfCqrArlcUHx5tRU4ngMIhy+wOCrM31NkbyctR0EZHYzRKV/3fPKYLQ7G6OQ/DD
+    Ahe7rwBmqJA9I8yVQUzBbHIvRaxifaqruLtX4WgTbyPw+wtz92oV2VG4R1JbkIhO
+    XD6/h/4rnuwaZueDXm2rH138mEPBr9Ayybbjijhf0t9IkHBe9B8sFzxEBUtTKNZZ
+    9Cg6+qKAgZ90R+TXw4v+PdEx/aO/T0ydqa/KhuvoSQKBgQDHWBzF3+aTd4PQcuwv
+    bo1pz7d1tilNpkxTtFSceq/mie3mdjcW4NW0NSnSZNq5vnN+Yyo8Y1wns6mtkhct
+    ldEMiBTelTXDiAijSAlBWrfme3ASx2JrjJtKti904akmV4+/D1SgjQwX9BEdNJkU
+    AbUGRa41vmWBZubPoyxvg4HNDQKBgQDBFsnuRrIAFdlfsynA6b81Em1S2Y1JqSC4
+    E+m9m7jmWCN6ZaJBDLKXDU+357V7pWYs2VKW7d6w8J2ybr+cbrlMaIIvfcg8i7WW
+    Q/8De5v/dO1wqu+CnjjxXpBuGWm85wpXS/92B9h7X/BbSLhAkSu6WZBmF2Wxs1sO
+    7cXFjxchfwKBgAKsdN5WjXIm5Tazg+Vy9ySXK5/BjLZE57srrQLYRmmyKeWwaja9
+    V0BughwXTDO3kTb9v4BF2OOTblAsqHDtFHu1i4ocuDbiKTN/cNhWjibiOvOVhwVo
+    QmDzJpnLuQgRnpTycLEikynzFROuM+tnxnTKFHcWEah1p9zbFGp+egw1AoGAPoIC
+    HQEF3sEz/acifTEulR/CBHApLQ9zaCQKJzeiQ++EjLsaK7TQm9XTWNXKCp0g1qQD
+    +JhI3z8Fzh3MKfguRG4Qtw8hI3iW8G5Sv+3kMm7H7xFnOAHArWLPntTbRiwFTP1t
+    Veh0THxicyq3ey+D2G/mLyaj5UMK12ph+/K2qkECgYBi8JzQqa1YZaG94Deqz1D+
+    6fGgeNYZmEr1Dzzw4fq6rZ8czEXaKa6w9+kdXJ55k+CyTbh9kVAWIe/wbPx6wuwe
+    V69ST7qDiEqcwviY+z3yniVUd9oUF79pLW3oRyn05Cn4dIMOWK/wduW3T8YUpA05
+    86wTtsXQzHGfSqjptN9Qqw==
     -----END PRIVATE KEY-----
   publicKey: |
     -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlN4tdLo+jsCBKixqtDLr
-    akID/+LFDTnbduQVhROJbfBW6H+/ap/1FlY42zegOUvJNybmPJ8j0cSVoXjVLrzX
-    AyTIxi5Yr05IFh9bxcEAu7s96st4uH+FFFa7twt5xmS4XzsTuQOYuFRMAMYZ05JF
-    B18Ct1a9t9UpH/Tep6XoP0g24WEdAp7cSKViYHWG9wB9p7Y7uaGVVD0Q7kgaUbTv
-    Zq8wzVpv6oarPAi5coUIeXGEYth4p6Qzg/NctNGwlwhhRX0+CFWe/F9zyT3fRRTt
-    iD3k85zUV+tHDVKu3nlp2g1yDH/C4DMcrNqMWZJBBeRdI4xsZL+cXOvcvljfaefU
-    1wIDAQAB
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAllssgWBc4vMZGLajQs8O
+    k+X/xX2AH9HPL7iTft2C2a/qIs/Zd6DtLFApGlqAqiKtdjECJhARCKDVagw60TTr
+    SpKtLW8N789nJgu5qkAJ1e+uk14Iz9XyCHreSqYc7DpRxDFDkolzMuWRTnTyvgcG
+    saGtgiO7fBKNIaBGUQD2XO/UM+/MluyQgfnZx9P1d5wQojitgTVwWb6F0Nmr5pjZ
+    BI6jTdjTcrsSzSAme27w5Avo8v+gXMf0MHCecsehz7O1FwZYxu0RfMd3xZ1E1pKW
+    2GGdPHsI1Q7kRwDjBVCQjaHOOyJAPhuDIDXp7x61R7OPzLEQ8TTgb8Pz3ol6p/5m
+    cwIDAQAB
     -----END PUBLIC KEY-----
   jwtRefreshExpirationS: 604800
   jwtAccessTokenExpirationS: 86400

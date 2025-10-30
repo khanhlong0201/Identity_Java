@@ -2,8 +2,10 @@ package java_learn.identity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing // 👈 thêm dòng này
 public class IdentityApplication {
 
 	public static void main(String[] args) {

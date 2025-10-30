@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +25,8 @@ public class TokenAuthenticationUseCaseService {
     @Transactional(readOnly = true)
     public Optional<UserDetails> login(String username, String password) {
         return Optional.ofNullable(userDetailsService
-                .loadUserByUsername(username));
-//                .filter(user -> passwordEncoder.matches(password,user.getPassword()));
+                .loadUserByUsername(username))
+                .filter(user -> passwordEncoder.matches(password,user.getPassword()));
     }
 
 }

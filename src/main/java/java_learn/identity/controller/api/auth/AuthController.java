@@ -9,8 +9,7 @@ import java_learn.identity.core.model.ValueResponse;
 import java_learn.identity.core.security.models.JwtToken;
 import java_learn.identity.domain.constants.ErrorCode;
 import java_learn.identity.service.auth.TokenAuthenticationUseCaseService;
-import java_learn.identity.service.users.UserQueryService;
-import java_learn.identity.service.users.UserUseCaseService;
+import java_learn.identity.service.users.UserUseCaseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ public class AuthController implements AuthApi {
     TokenAuthenticationUseCaseService tokenAuthenticationUseCaseService;
 
     @NotNull
-    UserUseCaseService userUseCaseService;
+    UserUseCaseServiceImpl userUseCaseServiceImpl;
 
 
     @Override
@@ -37,7 +36,7 @@ public class AuthController implements AuthApi {
                             ErrorCode.LOGIN_INVALID.getMessage(),
                             HttpStatus.UNAUTHORIZED);
                 });
-        JwtToken jwtToken = userUseCaseService.auth(userAuthentication.user());
+        JwtToken jwtToken = userUseCaseServiceImpl.auth(userAuthentication.user());
         JwtResponse jwtResponse = JwtResponse.of(jwtToken);
         return new ValueResponse<>(jwtResponse);
     }
